@@ -8,7 +8,7 @@ function computerPlay() {
     return "Scissors";
   }
 }
-
+// play one round
 function playRound(playerSelection, computerSelection) {
   let player = playerSelection.toUpperCase();
   let computer = computerSelection.toUpperCase();
@@ -51,6 +51,7 @@ let computerScore = 0;
 let computerSelection = computerPlay();
 // console.log(computerSelection);
 
+// five round game
 function game() {
   for (let i = 1; i <= 5; i++) {
     console.log(`ROUND: ${i}`);
@@ -66,6 +67,7 @@ function game() {
     return "No one Wins, its a tie!";
   }
 }
+
 console.log(game());
 // let userInput = prompt("Select a weapon, rock paper or scissors");
 let playerWin;
