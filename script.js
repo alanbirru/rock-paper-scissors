@@ -8,6 +8,12 @@ function computerPlay() {
     return "Scissors";
   }
 }
+// Scores
+let playerScore = 0;
+let computerScore = 0;
+
+let messages = document.querySelector(".messages");
+
 // play one round
 function playRound(playerSelection, computerSelection) {
   let player = playerSelection.toUpperCase();
@@ -20,54 +26,99 @@ function playRound(playerSelection, computerSelection) {
   let scissorsWins = "Scissors beats Paper";
 
   if (player === computer) {
-    return "tie";
+    messages.textContent = `its a tie!, you both picked: ${computer}`;
     // if the player wins
   } else if (player === "ROCK" && computer === "SCISSORS") {
     playerScore++;
-    return `${youWin} ${rockWins}`;
+    messages.textContent = `${youWin} ${rockWins}`;
   } else if (player === "PAPER" && computer === "ROCK") {
     playerScore++;
-    return `${youWin} ${paperWins}`;
+    messages.textContent = `${youWin} ${paperWins}`;
   } else if (player === "SCISSORS" && computer === "PAPER") {
     playerScore++;
-    return `${youWin} ${scissorsWins}`;
+    messages.textContent = `${youWin} ${scissorsWins}`;
   }
   //   if the computer wins
   else if (computer === "ROCK" && player === "SCISSORS") {
     computerScore++;
-    return `${youLose} ${rockWins}`;
+    messages.textContent = `${youLose} ${rockWins}`;
   } else if (computer === "PAPER" && player === "ROCK") {
     computerScore++;
-    return `${youLose} ${paperWins}`;
+    messages.textContent = `${youLose} ${paperWins}`;
   } else if (computer === "SCISSORS" && player === "PAPER") {
     computerScore++;
-    return `${youLose} ${scissorsWins}`;
-  }
-}
-let playerScore = 0;
-let computerScore = 0;
-
-// console.log(playerSelection);
-let computerSelection = computerPlay();
-// console.log(computerSelection);
-
-// five round game
-function game() {
-  for (let i = 1; i <= 5; i++) {
-    console.log(`ROUND: ${i}`);
-
-    console.log(playRound(prompt("rock paper or Scissors"), computerSelection));
-  }
-  console.log(`computer: ${computerScore} You: ${playerScore}`);
-  if (playerScore > computerScore) {
-    return "Player Wins!";
-  } else if (playerScore < computerScore) {
-    return "Computer Wins!  ";
-  } else {
-    return "No one Wins, its a tie!";
+    messages.textContent = `${youLose} ${scissorsWins}`;
   }
 }
 
-console.log(game());
-// let userInput = prompt("Select a weapon, rock paper or scissors");
-let playerWin;
+let playerScoreTag = document.querySelector(".playerScore");
+let computerScoreTag = document.querySelector(".computerScore");
+// buttons variables
+let buttonRock = document.querySelector("#Rock");
+let buttonPaper = document.querySelector("#Paper");
+let buttonScissors = document.querySelector("#Scissors");
+
+// checking who score more points
+function Score() {
+  if (playerScore >= 5) {
+    // playerScore = 0;
+    // computerScore = 0;
+    buttonRock.disabled = true;
+    buttonPaper.disabled = true;
+    buttonScissors.disabled = true;
+    messages.textContent = "player wins!";
+  } else if (computerScore >= 5) {
+    // playerScore = 0;
+    // computerScore = 0;
+    buttonRock.disabled = true;
+    buttonPaper.disabled = true;
+    buttonScissors.disabled = true;
+    messages.textContent = "computer Wins!";
+  }
+}
+
+function ResetButton() {
+  playerScoreTag.textContent = 0;
+  computerScoreTag.textContent = 0;
+  buttonRock.disabled = false;
+  buttonPaper.disabled = false;
+  buttonScissors.disabled = false;
+  playerScore = 0;
+  computerScore = 0;
+  messages.textContent = " ";
+}
+
+// Rock Button
+document.querySelector("#Rock").addEventListener("click", function (e) {
+  console.log(playRound("Rock", computerPlay()));
+  console.log(playerScore);
+  console.log(computerScore);
+  console.log(Score());
+
+  playerScoreTag.textContent = playerScore;
+  computerScoreTag.textContent = computerScore;
+});
+// Paper Button
+document.querySelector("#Paper").addEventListener("click", function (e) {
+  console.log(playRound("Paper", computerPlay()));
+  console.log(playerScore);
+  console.log(computerScore);
+  console.log(Score());
+
+  playerScoreTag.textContent = playerScore;
+  computerScoreTag.textContent = computerScore;
+});
+// Scissors Button
+document.querySelector("#Scissors").addEventListener("click", function (e) {
+  console.log(playRound("Scissors", computerPlay()));
+  console.log(playerScore);
+  console.log(computerScore);
+  console.log(Score());
+
+  playerScoreTag.textContent = playerScore;
+  computerScoreTag.textContent = computerScore;
+});
+
+document.querySelector("#Reset").addEventListener("click", function (e) {
+  ResetButton();
+});
