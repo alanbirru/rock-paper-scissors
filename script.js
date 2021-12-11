@@ -85,7 +85,7 @@ function ResetButton() {
   buttonScissors.disabled = false;
   playerScore = 0;
   computerScore = 0;
-  messages.textContent = " ";
+  messages.textContent = "Waiting..";
 }
 
 // Rock Button
@@ -119,6 +119,6 @@ document.querySelector("#Scissors").addEventListener("click", function (e) {
   computerScoreTag.textContent = computerScore;
 });
 
-document.querySelector("#Reset").addEventListener("click", function (e) {
+document.querySelector("#reset").addEventListener("click", function (e) {
   ResetButton();
 });
